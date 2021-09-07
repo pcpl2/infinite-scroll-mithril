@@ -15,9 +15,9 @@
     "component"
   ],
   "bugs": {
-    "url": "https://github.com/"
+    "url": "https://github.com/pcpl2/infinite-scroll-mithril/issues"
   },
-  "homepage": "https://github.com/",
+  "homepage": "https://github.com/pcpl2/infinite-scroll-mithril",
   "author": "Patryk Ławicki <open-source@patryk-lawicki.pl> (https://patryk-lawicki.pl)",
   "license": "BSD-2-Clause License"
 }
