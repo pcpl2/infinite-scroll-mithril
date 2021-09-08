@@ -1,6 +1,6 @@
 {
   "name": "infinite-scroll-mithril",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Infinity scroll component for mithril",
   "scripts": {
     "test": "node ./src/index"
