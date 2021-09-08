@@ -1,10 +1,11 @@
 {
   "name": "infinite-scroll-mithril",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Infinity scroll component for mithril",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./src/index"
   },
+  "type": "module",
   "peerDependencies": {
     "mithril": "^2.0.4"
   },
