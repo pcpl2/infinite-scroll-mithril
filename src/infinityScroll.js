@@ -6,7 +6,7 @@ function runRequest(vnode) {
   }
   vnode.state.loading = true
 
-  vnode.attrs.pageRequest(vnode.state.page).then((result) => {
+  vnode.attrs.pageRequest(vnode.state.page, vnode.state.pageRequestParam).then((result) => {
     vnode.state.page = vnode.state.page + 1
     vnode.state.scrollElements = vnode.state.scrollElements.concat(result)
     vnode.state.loading = false
@@ -26,6 +26,9 @@ const InfinityScroll = () => ({
       vnode.state.processPageData = vnode.attrs.processPageData;
     }
     vnode.state.loadNext = true
+    if(vnode.attrs.pageRequestParam != undefined) {
+      vnode.state.pageRequestParam = vnode.attrs.pageRequestParam
+    }
 
     const options = {
       root: null, //window by default
@@ -37,12 +40,23 @@ const InfinityScroll = () => ({
       runRequest(vnode)
     }
 
-    vnode.state.io = new IntersectionObserver(entries => {
+    vnode.state.io = new IntersectionObserver(_ => {
       runRequest(vnode)
     }, options)
   },
   oncreate(vnode) {
     vnode.state.io.observe(document.querySelector('#sentinel'))
+  },
+  onupdate(vnode) {
+    if(vnode.attrs.pageRequestParam != undefined || vnode.state.pageRequestParam != undefined) {
+      if(Object.entries(vnode.state.pageRequestParam).toString() != Object.entries(vnode.attrs.pageRequestParam).toString()) {
+        vnode.state.pageRequestParam = vnode.attrs.pageRequestParam;
+        vnode.state.scrollElements = [];
+        vnode.state.page = 0;
+        vnode.state.loadNext = true;
+        m.redraw();
+      }
+    }
   },
   onbeforeremove(vnode) {
     vnode.state.io.unobserve(document.querySelector('#sentinel'))
